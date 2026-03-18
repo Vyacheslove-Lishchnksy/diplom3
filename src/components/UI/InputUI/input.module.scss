@@ -1,0 +1,12 @@
+.input {
+  &:focus {
+    outline: none;
+  }
+}
+
+.wrapper {
+  border-color: white;
+  &:focus-within {
+    outline: 1px solid white;
+  }
+}

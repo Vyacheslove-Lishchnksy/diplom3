@@ -1,0 +1,19 @@
+.simpleSmallButton {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    color: var(--text-gray-300);
+    color: gray;
+  }
+  &:hover {
+    & svg {
+      color: #e2e2e2;
+    }
+  }
+}

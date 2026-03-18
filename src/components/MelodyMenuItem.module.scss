@@ -1,0 +1,18 @@
+.MenuItem {
+  &:hover {
+    background-color: var(--color-gray-900);
+
+    .playButton {
+      background-color: var(--color-gray-700);
+      svg {
+        color: var(--color-gray-100);
+      }
+    }
+  }
+}
+
+.playButton {
+  svg {
+    color: var(--color-gray-500);
+  }
+}

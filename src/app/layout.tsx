@@ -27,7 +27,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="flex h-screen overflow-hidden items-start justify-center bg-zinc-50 font-sans dark:bg-black">
+          <main className="flex h-full w-full max-w-6xl flex-col items-center pt-16 px-16 bg-white dark:bg-black sm:items-start">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

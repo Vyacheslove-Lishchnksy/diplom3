@@ -1,0 +1,11 @@
+.cell {
+  background: black;
+
+  &.selected {
+    background: white;
+  }
+
+  &:hover {
+    background: #b4b4b4 !important;
+  }
+}
