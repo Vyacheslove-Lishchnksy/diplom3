@@ -8,6 +8,7 @@ import ErrorTextUI from "@/src/components/UI/ErrorTextUI";
 import { noteDurationList } from "@/src/configs/redactorConfig";
 import RedactorApp from "./RedactorApp";
 import { useRedactor } from "@/src/hooks/useRedactor";
+import { useLocalization } from "@/src/hooks/useLocalization";
 
 const Redactor = () => {
   const {
@@ -21,11 +22,12 @@ const Redactor = () => {
     setNoteDuration,
     handleCreate,
   } = useRedactor();
+  const { RedactorHeaderTitle } = useLocalization();
 
   return (
     <>
       <div className="mb-24">
-        <HeaderUI>Redactor</HeaderUI>
+        <HeaderUI>{RedactorHeaderTitle}</HeaderUI>
       </div>
 
       <section className="flex gap-4 h-8" style={{ marginBottom: "24px" }}>

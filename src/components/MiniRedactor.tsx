@@ -4,7 +4,9 @@ import InputUI from "./UI/InputUI/InputUI";
 import { useMelodyStore } from "../store/melodyStore";
 import useOutsideClick from "../hooks/useOutsideClick";
 import ErrorTextUI, { IErrorFormat } from "./UI/ErrorTextUI";
-import { validateRTTTL } from "../scripts/RTTTLCheker";
+import { useValidateRTTTL } from "../hooks/RTTTLCheker";
+import { useLocalization } from "../hooks/useLocalization";
+import { EnglishSet } from "../configs/lang/en";
 
 interface MiniRedactorProps {
   melody: RTTTLMelody;
@@ -31,6 +33,9 @@ const MiniRedactor = ({
   useOutsideClick(inputRef, () => {
     setIsRedacting(false);
   }, [callButtonRef]);
+
+  const lang = useLocalization();
+  const validRTTTL = useValidateRTTTL();
 
   function saveChanges(e: KeyboardEvent) {
     if (e.key === "Enter") {
@@ -70,9 +75,15 @@ const MiniRedactor = ({
             value={melodyTitle}
             onChange={(e) => {
               setMelodyTitle(e.target.value);
-              if (!currentList.find((item) => item.title === melodyTitle)) {
+              if (
+                currentList.find((item) => {
+                  return (
+                    item.title === e.target.value && item.title !== melody.title
+                  );
+                })
+              ) {
                 setInputError({
-                  title: "Melodies can`t have the same name",
+                  title: lang.TheSameNameError ?? EnglishSet.TheSameNameError,
                   isError: true,
                 });
                 return;
@@ -102,7 +113,7 @@ const MiniRedactor = ({
           value={melodyCode}
           onChange={(e) => {
             setMelodyCode(e.target.value);
-            const error = validateRTTTL(e.target.value);
+            const error = validRTTTL(e.target.value);
             setInputError(error);
           }}
           onKeyDown={saveChanges}

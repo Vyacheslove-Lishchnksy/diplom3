@@ -3,9 +3,15 @@ import { useStateStore } from "../store/melodyStore";
 import ChangeModeButton from "./ChangeModeButton";
 import AddNewMelodyButton from "./AddNewMelodyButton";
 import SearchUI from "./UI/SearchUI/SearchUI";
+import { useLocalization } from "../hooks/useLocalization";
+import { EnglishSet } from "../configs/lang/en";
+import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
+import { useCurrentLangFlag } from "../hooks/useCurrentLangFlag";
 
 const NavigationBar = (): JSX.Element => {
-  const { search, setSearch } = useStateStore((state) => state);
+  const { search, setSearch, lang, setLang } = useStateStore((state) => state);
+  const { Search } = useLocalization();
+  const flag = useCurrentLangFlag();
 
   return (
     <nav
@@ -15,8 +21,19 @@ const NavigationBar = (): JSX.Element => {
       <div className="flex">
         <ChangeModeButton />
         <AddNewMelodyButton />
+        <SimpleSmallButtonUI
+          onClick={() => {
+            setLang(lang === "en" ? "uk" : "en");
+          }}
+        >
+          {flag}
+        </SimpleSmallButtonUI>
       </div>
-      <SearchUI search={search} setSearch={setSearch} />
+      <SearchUI
+        search={search}
+        setSearch={setSearch}
+        placeholder={Search ?? EnglishSet.Search}
+      />
     </nav>
   );
 };

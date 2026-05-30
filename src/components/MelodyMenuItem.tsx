@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, RefObject } from "react";
+import { useRef, useState, RefObject, memo } from "react";
 import { HiMiniPencilSquare } from "react-icons/hi2";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { RTTTLMelody } from "../configs/default_melodies";
@@ -9,7 +9,7 @@ import styles from "./MelodyMenuItem.module.scss";
 import PlayButton from "./PlayButton";
 import useDeleteMelody from "../hooks/useDeleteMelody";
 
-export const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
+const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
   const [isRedacting, setIsRedacting] = useState(false);
   const deleteMelody = useDeleteMelody({ melody });
   const callRedactorButton = useRef<HTMLButtonElement>(null);
@@ -39,3 +39,5 @@ export const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
     </div>
   );
 };
+
+export default memo(MelodyMenuItem);

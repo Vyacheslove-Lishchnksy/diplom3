@@ -21,6 +21,12 @@ class RTTTLPlayer {
     p: 0,
   };
 
+  private readonly parsedCache = new Map<
+    string,
+    { freq: number; duration: number }[]
+  >();
+  private static readonly NOTE_REGEX = /(\d+)?([a-gp]#?)(\d+)?(\.)?/i;
+
   public onEnd?: () => void;
 
   public getCurrentCode() {
@@ -62,6 +68,12 @@ class RTTTLPlayer {
   }
 
   private parseRTTTL(rtttl: string) {
+    const cached = this.parsedCache.get(rtttl);
+    if (cached) {
+      this.notesQueue = cached;
+      return;
+    }
+
     const sections = rtttl.split(":");
     if (sections.length < 3) return;
 
@@ -78,8 +90,8 @@ class RTTTLPlayer {
     const bpm = settings.b || 125;
     const wholeNoteMs = (60 / bpm) * 4 * 1000;
 
-    this.notesQueue = sections[2].split(",").map((noteStr) => {
-      const match = noteStr.trim().match(/(\d+)?([a-p#]+)(\d+)?(\.)?/i);
+    const parsedNotes = sections[2].split(",").map((noteStr) => {
+      const match = noteStr.trim().match(RTTTLPlayer.NOTE_REGEX);
       if (!match) return { freq: 0, duration: 0 };
 
       const [, duration, note, octave, dot] = match;
@@ -94,6 +106,9 @@ class RTTTLPlayer {
         duration: noteDuration,
       };
     });
+
+    this.notesQueue = parsedNotes;
+    this.parsedCache.set(rtttl, parsedNotes);
   }
 
   private scheduler() {
@@ -144,4 +159,12 @@ class RTTTLPlayer {
   }
 }
 
-export const playerInstance = new RTTTLPlayer();
+let playerInstance: RTTTLPlayer | null = null;
+
+export const getPlayerInstance = () => {
+  if (typeof window === "undefined") return null;
+  if (!playerInstance) {
+    playerInstance = new RTTTLPlayer();
+  }
+  return playerInstance;
+};

@@ -15,7 +15,10 @@ const PlayButton = ({ melody }: IPlayButtonProps): JSX.Element => {
     <div className="flex">
       <button
         className={`w-16 h-16 rounded-2xl flex items-center justify-center cursor-pointer bg-gray-900 ${styles.playButton}`}
-        onClick={togglePlayback}
+        onClick={() => {
+          console.log(`${new Date().getTime()}`);
+          togglePlayback();
+        }}
       >
         {isCurrentPlaying ? (
           <MdOutlinePause

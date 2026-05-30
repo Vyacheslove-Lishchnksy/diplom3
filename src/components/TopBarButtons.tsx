@@ -1,3 +1,5 @@
+"use client";
+
 import { PiPlugsConnected } from "react-icons/pi";
 import { MODAL_STATES } from "@/src/configs/modalConfig";
 import { JSX, useRef, useState } from "react";
@@ -33,6 +35,7 @@ const TopBarButtons = (): JSX.Element => {
         ref={buttonRef}
       >
         <SimpleButtonUI
+          title="File work"
           tabIndex={1}
           onClick={() => {
             setModalState("fileMenu");
@@ -42,6 +45,7 @@ const TopBarButtons = (): JSX.Element => {
           <FaRegFileCode />
         </SimpleButtonUI>
         <SimpleButtonUI
+          title="Change id"
           tabIndex={10}
           onClick={() => {
             setModalState("connectMenu");

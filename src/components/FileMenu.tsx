@@ -1,12 +1,16 @@
+"use client";
+
 import { FaFileDownload, FaFileUpload } from "react-icons/fa";
 import { ButtonUI } from "./UI/ButtonUI";
 import { rtttlFileInstance } from "../scripts/RTTTLFile";
 import { useMelodyStore } from "../store/melodyStore";
 import { useState } from "react";
+import { useLocalization } from "../hooks/useLocalization";
 
 export const FileMenu = () => {
   const currentList = useMelodyStore((state) => state.currentList);
   const setCurrentList = useMelodyStore((state) => state.setCurrentList);
+  const lang = useLocalization();
 
   const [isLoadFile, setIsLoadFile] = useState(false);
 
@@ -20,7 +24,7 @@ export const FileMenu = () => {
               rtttlFileInstance.getFile(currentList);
             }}
           >
-            <span>Export</span> <FaFileDownload />
+            <span>{lang.ExportButtonText}</span> <FaFileDownload />
           </ButtonUI>
           <ButtonUI
             tabIndex={3}
@@ -28,7 +32,7 @@ export const FileMenu = () => {
               setIsLoadFile(true);
             }}
           >
-            <span>Import</span> <FaFileUpload />
+            <span>{lang.ImportButtonText}</span> <FaFileUpload />
           </ButtonUI>
         </div>
       ) : (
@@ -63,7 +67,7 @@ export const FileMenu = () => {
               setIsLoadFile(false);
             }}
           >
-            Upload
+            {lang.UploadButtonTitle}
           </ButtonUI>
         </>
       )}

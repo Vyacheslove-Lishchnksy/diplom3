@@ -2,7 +2,7 @@ import { create } from "zustand";
 import RTTTL_LIBRARY, { RTTTLMelody } from "../configs/default_melodies";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { DeviceStatus } from "../api/actions";
-import { TOutputMode } from "../configs/defaultOptions";
+import { TLangCode, TOutputMode } from "../configs/defaultOptions";
 
 interface MelodyState {
   currentList: RTTTLMelody[];
@@ -34,6 +34,8 @@ interface StateStore {
   setOutputMode: (state: TOutputMode) => void;
   isPlaying: boolean;
   setIsPlaying: (state: boolean) => void;
+  lang: TLangCode;
+  setLang: (lang: TLangCode) => void;
 }
 
 export const useStateStore = create<StateStore>((set) => ({
@@ -52,6 +54,10 @@ export const useStateStore = create<StateStore>((set) => ({
   isPlaying: false,
   setIsPlaying: (state) => {
     set({ isPlaying: state });
+  },
+  lang: "uk",
+  setLang: (lang) => {
+    set({ lang });
   },
 }));
 

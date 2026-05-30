@@ -1,43 +1,46 @@
 "use client";
 
-import { MelodyMenuItem } from "../components/MelodyMenuItem";
-import {
-  useMelodyStore,
-  useMQTTStore,
-  useStateStore,
-} from "../store/melodyStore";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
+import MelodyMenuItem from "../components/MelodyMenuItem";
+import { useMelodyStore, useStateStore } from "../store/melodyStore";
 import Link from "next/link";
 import { BigButtonUI } from "../components/UI/BigButtonUI";
 import HeaderUI from "../components/UI/HeaderUI";
-import { subscribeToStatus } from "../api/actions";
-import { useEffect } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import NavigationBar from "../components/NavigationBar";
-import TopBarButtons from "../components/TopBarButtons";
+import { useLocalization } from "../hooks/useLocalization";
+import { useStatusCheck } from "../hooks/useStatusChack";
+
+const NavigationBar = dynamic(() => import("../components/NavigationBar"), {
+  ssr: false,
+});
+const TopBarButtons = dynamic(() => import("../components/TopBarButtons"), {
+  ssr: false,
+});
 
 export default function Home() {
-  const { currentList } = useMelodyStore((state) => state);
-  const { setStatus, search } = useStateStore((store) => store);
-  const { deviceId } = useMQTTStore((store) => store);
+  const currentList = useMelodyStore((state) => state.currentList);
+  const search = useStateStore((store) => store.search);
 
-  useEffect(() => {
-    let unsubscribe = () => {};
+  useStatusCheck();
 
-    unsubscribe = subscribeToStatus(deviceId, (newStatus) => {
-      setStatus(newStatus);
+  const text = useLocalization();
+
+  const filteredList = useMemo(() => {
+    const normalizedSearch = search.toLowerCase();
+
+    return currentList.filter((item) => {
+      return (
+        item.title.toLowerCase().includes(normalizedSearch) ||
+        normalizedSearch === ""
+      );
     });
-
-    return () => unsubscribe();
-  }, [deviceId, setStatus]);
-
-  const filteredList = currentList.filter((item) => {
-    return item.title.toLowerCase().includes(search) || search === "";
-  });
+  }, [currentList, search]);
 
   return (
     <>
       <div className="flex mb-24 w-full items-center justify-between px-4">
-        <HeaderUI>All melodies</HeaderUI>
+        <HeaderUI>{text.HomeHeaderTitle}</HeaderUI>
         <TopBarButtons />
       </div>
       <NavigationBar />

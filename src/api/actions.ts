@@ -52,6 +52,8 @@ export const subscribeToStatus = (
     if (topic === statusTopic) {
       try {
         const status: DeviceStatus = JSON.parse(message.toString());
+
+        console.log(status);
         onStatusUpdate(status);
       } catch (e) {
         console.error("[MQTT] Error parsing status message", e);
@@ -83,7 +85,7 @@ export const sendBuzzerCommand = (deviceId: string, payload: BuzzerCommand) => {
 
   client.on("connect", () => {
     client.publish(targetTopic, payload, { qos: 1 }, () => {
-      console.log("[MQTT] 📤 Пакет успішно доставлено брокеру");
+      console.log("[MQTT] Пакет успішно доставлено брокеру");
       client.end();
     });
   });

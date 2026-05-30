@@ -5,12 +5,14 @@ import Storage from "../api/Storage";
 import { ButtonUI } from "./UI/ButtonUI";
 import InputUI from "./UI/InputUI/InputUI";
 import { useMQTTStore } from "../store/melodyStore";
+import { useLocalization } from "../hooks/useLocalization";
 
 export const ConnectionForm = () => {
   const deviceId = Storage.getDeviceId();
   const [id, setId] = useState(deviceId);
   const [value, setValue] = useState(deviceId);
   const { setDeviceId } = useMQTTStore((store) => store);
+  const lang = useLocalization();
 
   const handleSubmit = () => {
     const newId = value ?? "";
@@ -24,7 +26,9 @@ export const ConnectionForm = () => {
       <div className="flex flex-col gap-2">
         {
           <>
-            <h2>{id ? "Connected to device ID:" : "No connected to device"}</h2>
+            <h2>
+              {id ? lang.ChangeDeviceMenuTitle : lang.ChangeDeviceMenuTitleNo}
+            </h2>
             <InputUI
               tabIndex={11}
               type="text"
@@ -35,7 +39,7 @@ export const ConnectionForm = () => {
               onChange={(e) => setValue(e.target.value)}
             />
             <ButtonUI onClick={handleSubmit} tabIndex={12}>
-              {id ? "Change" : "Connect"}
+              {id ? lang.ChangeButtonTitle : lang.ConnectButtonTitle}
             </ButtonUI>
           </>
         }
