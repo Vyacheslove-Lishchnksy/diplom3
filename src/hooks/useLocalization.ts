@@ -1,8 +1,8 @@
 import { ILangSet, locales } from "../configs/lang";
-import { useStateStore } from "../store/melodyStore";
+import { useLocaleStore } from "../store/stateStore"; 
 
 export const useLocalization = (): ILangSet => {
-  const lang = useStateStore((store) => store.lang);
+  const lang = useLocaleStore((store) => store.lang);
 
   return locales[lang];
 };

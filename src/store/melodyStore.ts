@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import RTTTL_LIBRARY, { RTTTLMelody } from "../configs/default_melodies";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { DeviceStatus } from "../api/actions";
-import { TLangCode, TOutputMode } from "../configs/defaultOptions";
+
 
 interface MelodyState {
   currentList: RTTTLMelody[];
@@ -24,80 +23,6 @@ export const useMelodyStore = create<MelodyState>()(
     },
   ),
 );
-
-interface StateStore {
-  currentStatus: DeviceStatus;
-  setStatus: (state: DeviceStatus) => void;
-  search: string;
-  setSearch: (state: string) => void;
-  currentOutputMode: TOutputMode;
-  setOutputMode: (state: TOutputMode) => void;
-  isPlaying: boolean;
-  setIsPlaying: (state: boolean) => void;
-  lang: TLangCode;
-  setLang: (lang: TLangCode) => void;
-}
-
-export const useStateStore = create<StateStore>((set) => ({
-  currentStatus: { state: "online", melody: null },
-  setStatus: (state) => {
-    set({ currentStatus: state });
-  },
-  search: "",
-  setSearch: (state) => {
-    set({ search: state });
-  },
-  currentOutputMode: "deviceOutput",
-  setOutputMode: (state) => {
-    set({ currentOutputMode: state });
-  },
-  isPlaying: false,
-  setIsPlaying: (state) => {
-    set({ isPlaying: state });
-  },
-  lang: "uk",
-  setLang: (lang) => {
-    set({ lang });
-  },
-}));
-
-interface RTTTLStore {
-  name: string;
-  tempo: number;
-  octave: number;
-  noteDuration: number;
-  code: string;
-
-  setName: (name: string) => void;
-  setTempo: (duration: number) => void;
-  setOctave: (octave: number) => void;
-  setNoteDuration: (noteDuration: number) => void;
-  setCode: (code: string) => void;
-
-  reset: () => void;
-}
-
-const initialState = {
-  name: "Unnamed",
-  tempo: 120,
-  octave: 5,
-  noteDuration: 4,
-  code: "",
-};
-
-export const useRTTTLStore = create<RTTTLStore>((set) => ({
-  ...initialState,
-
-  setName: (name) => set({ name }),
-  setTempo: (tempo) => set({ tempo: tempo }),
-  setOctave: (octave) => set({ octave }),
-  setNoteDuration: (noteDuration) => set({ noteDuration }),
-  setCode: (code) => {
-    set({ code });
-  },
-
-  reset: () => set(initialState),
-}));
 
 interface MQTTStore {
   deviceId: string;

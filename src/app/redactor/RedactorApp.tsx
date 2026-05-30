@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./RedactorApp.module.scss";
-import { useRTTTLStore } from "@/src/store/melodyStore";
+import { useRTTTLStore } from "@/src/store/RTTTLStore";
 import RTTTL from "@/src/scripts/RTTTL";
 import { octaves, notes, initValue } from "@/src/configs/redactorConfig";
 

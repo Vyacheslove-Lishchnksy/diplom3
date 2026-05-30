@@ -3,7 +3,8 @@
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import MelodyMenuItem from "../components/MelodyMenuItem";
-import { useMelodyStore, useStateStore } from "../store/melodyStore";
+import { useMelodyStore } from "../store/melodyStore";
+import { useStateStore } from "../store/stateStore";
 import Link from "next/link";
 import { BigButtonUI } from "../components/UI/BigButtonUI";
 import HeaderUI from "../components/UI/HeaderUI";
@@ -22,7 +23,7 @@ export default function Home() {
   const currentList = useMelodyStore((state) => state.currentList);
   const search = useStateStore((store) => store.search);
 
-  useStatusCheck();
+  useStatusCheck();  
 
   const text = useLocalization();
 

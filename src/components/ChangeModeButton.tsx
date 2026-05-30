@@ -2,7 +2,7 @@ import { JSX } from "react";
 import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import { BsBrowserChrome } from "react-icons/bs";
 import { TbDeviceIpadFilled } from "react-icons/tb";
-import { useStateStore } from "../store/melodyStore";
+import { useStateStore } from "../store/stateStore";
 
 const ChangeModeButton = (): JSX.Element => {
   const { currentOutputMode, setOutputMode } = useStateStore((state) => state);

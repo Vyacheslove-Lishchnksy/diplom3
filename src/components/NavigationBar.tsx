@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { useStateStore } from "../store/melodyStore";
+import { useStateStore, useLocaleStore } from "../store/stateStore";
 import ChangeModeButton from "./ChangeModeButton";
 import AddNewMelodyButton from "./AddNewMelodyButton";
 import SearchUI from "./UI/SearchUI/SearchUI";
@@ -9,10 +9,11 @@ import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import { useCurrentLangFlag } from "../hooks/useCurrentLangFlag";
 
 const NavigationBar = (): JSX.Element => {
-  const { search, setSearch, lang, setLang } = useStateStore((state) => state);
+  const { search, setSearch,  } = useStateStore((state) => state);
+  const { lang, setLang } = useLocaleStore((state) => state);
   const { Search } = useLocalization();
   const flag = useCurrentLangFlag();
-
+ 
   return (
     <nav
       className="flex w-full p-4"

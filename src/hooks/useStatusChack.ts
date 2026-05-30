@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useMQTTStore, useStateStore } from "../store/melodyStore";
+import { useMQTTStore } from "../store/melodyStore";
+import {  useStateStore } from "../store/stateStore" 
 import { subscribeToStatus } from "../api/actions";
 
 export const useStatusCheck = () => {
