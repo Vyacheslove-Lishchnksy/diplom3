@@ -2,8 +2,8 @@ import mqtt from "mqtt";
 
 const MQTT_CONFIG = {
   host: "broker.emqx.io",
-  port: 8083,
-  protocol: "ws",
+  port: 8084,
+  protocol: "wss",
   path: "/mqtt",
 };
 
@@ -16,7 +16,7 @@ export type BuzzerCommand = "PAUSE" | "RESUME" | "TOGGLE";
 
 export const publishMelody = async (melodyString: string, deviceId: string) => {
   const client = mqtt.connect(
-    `ws://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
+    `${MQTT_CONFIG.protocol}://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
   );
 
   client.on("connect", () => {
@@ -36,7 +36,7 @@ export const subscribeToStatus = (
   onStatusUpdate: (status: DeviceStatus) => void,
 ) => {
   const client = mqtt.connect(
-    `ws://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
+    `${MQTT_CONFIG.protocol}://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
   );
   const statusTopic = `${deviceId}/buzzer/status`;
 
@@ -78,7 +78,7 @@ export const sendBuzzerCommand = (deviceId: string, payload: BuzzerCommand) => {
   );
 
   const client = mqtt.connect(
-    `ws://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
+    `${MQTT_CONFIG.protocol}://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
   );
 
   const targetTopic = `${deviceId}/buzzer`;
