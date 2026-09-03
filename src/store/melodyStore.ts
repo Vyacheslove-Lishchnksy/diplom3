@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import RTTTL_LIBRARY, { RTTTLMelody } from "../configs/default_melodies";
+import  { RTTTLMelody } from "../configs/default_melodies";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 
@@ -11,7 +11,7 @@ interface MelodyState {
 export const useMelodyStore = create<MelodyState>()(
   persist(
     (set) => ({
-      currentList: RTTTL_LIBRARY,
+      currentList: [],
       setCurrentList: (newList: RTTTLMelody[]) => {
         set({ currentList: newList });
       },

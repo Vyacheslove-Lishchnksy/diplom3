@@ -8,12 +8,14 @@ import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import styles from "./MelodyMenuItem.module.scss";
 import PlayButton from "./PlayButton";
 import useDeleteMelody from "../hooks/useDeleteMelody";
+import { useMutation } from "@tanstack/react-query";
 
 const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
   const [isRedacting, setIsRedacting] = useState(false);
   const deleteMelody = useDeleteMelody({ melody });
   const callRedactorButton = useRef<HTMLButtonElement>(null);
 
+  
   return (
     <div
       className={`flex w-full cursor-pointer py-2 px-4 rounded-2xl justify-between items-center ${styles.MenuItem}`}

@@ -1,4 +1,4 @@
-import { JSX, useMemo } from "react"
+import { JSX, useEffect, useMemo } from "react"
 import HeaderUI from "./UI/HeaderUI"
 import { useQuery } from "@tanstack/react-query";
 import { useStateStore } from "../store/stateStore";
@@ -10,22 +10,27 @@ import MelodyMenuItem from "./MelodyMenuItem";
 import { BigButtonUI } from "./UI/BigButtonUI";
 import { FaPlusCircle } from "react-icons/fa";
 import Link from "next/link";
+import { useMelodyStore } from "../store/melodyStore";
 
 export const App = (): JSX.Element => {
+
+  const currentList = useMelodyStore((state) => state.currentList)
+  const setCurrentStore = useMelodyStore((state) => state.setCurrentList)
 
   const query = useQuery({
     queryKey: ["currentList"],
     queryFn: async () => {
-      console.log("do")
-      const response = await fetch('https://pg-melody-server-2.onrender.com//melodies', {method: "GET"});
+      const response = await fetch('https://pg-melody-server-2.onrender.com/melodies', {method: "GET"});
       if (!response.ok) throw new Error('current list is not access');
-      console.log(response)
       return response.json();
     }
   }) 
 
-  console.log("a " + query.data)
-  const currentList: RTTTLMelody[]= query.data ?? []
+
+  useEffect(() => {
+    setCurrentStore([...[].concat(query.data)])
+    
+  }, [query.data])
   
   const search = useStateStore((store) => store.search);
   const text = useLocalization();
@@ -33,8 +38,11 @@ export const App = (): JSX.Element => {
   const filteredList = useMemo(() => {
     const normalizedSearch = search.toLowerCase();
 
-
+    console.log(currentList)
     return currentList.filter((item: RTTTLMelody) => {
+      if (!item) {
+        return
+      }
       return (
         item.title.toLowerCase().includes(normalizedSearch) ||
         normalizedSearch === ""

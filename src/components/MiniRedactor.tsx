@@ -7,6 +7,8 @@ import ErrorTextUI, { IErrorFormat } from "./UI/ErrorTextUI";
 import { useValidateRTTTL } from "../hooks/RTTTLCheker";
 import { useLocalization } from "../hooks/useLocalization";
 import { EnglishSet } from "../configs/lang/en";
+import { useMutation } from "@tanstack/react-query";
+import { title } from "process";
 
 interface MiniRedactorProps {
   melody: RTTTLMelody;
@@ -30,6 +32,17 @@ const MiniRedactor = ({
     isError: false,
   });
 
+
+  const mutationPUT = useMutation({
+    mutationFn: async (newMelody: RTTTLMelody) => {
+      let response
+      console.log(`PUT, ${newMelody.id}-${newMelody.title}`)
+      response = await fetch(`https://pg-melody-server-2.onrender.com/melodies/${newMelody.id}`, {method: "PUT", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newMelody)})
+      console.log(await response.json())
+      return response.json();
+    }
+  })
+
   useOutsideClick(inputRef, () => {
     setIsRedacting(false);
   }, [callButtonRef]);
@@ -40,15 +53,21 @@ const MiniRedactor = ({
   function saveChanges(e: KeyboardEvent) {
     if (e.key === "Enter") {
       setCurrentList(
-        currentList.map((item: RTTTLMelody) => {
+        currentList.filter(item => item).map((item: RTTTLMelody) => {
+          console.log(`asdd${item}`)
           if (item.title !== melody.title || inputError.isError) {
             return item;
           } else {
             setIsRedacting(false);
-            return {
+            const newMelody = {
+              id: item.id,
               title: melodyTitle,
               code: melodyCode,
             };
+
+            mutationPUT.mutate(newMelody)
+            console.log(mutationPUT.error)
+            return newMelody
           }
         }),
       );
@@ -76,7 +95,7 @@ const MiniRedactor = ({
             onChange={(e) => {
               setMelodyTitle(e.target.value);
               if (
-                currentList.find((item) => {
+                currentList.filter(item => item).find((item) => {
                   return (
                     item.title === e.target.value && item.title !== melody.title
                   );
