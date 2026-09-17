@@ -8,7 +8,7 @@ import { useValidateRTTTL } from "../hooks/RTTTLCheker";
 import { useLocalization } from "../hooks/useLocalization";
 import { EnglishSet } from "../configs/lang/en";
 import { useMutation } from "@tanstack/react-query";
-import { title } from "process";
+import { instanceMelodiesDatabase } from "../api/Database";
 
 interface MiniRedactorProps {
   melody: RTTTLMelody;
@@ -33,14 +33,8 @@ const MiniRedactor = ({
   });
 
 
-  const mutationPUT = useMutation({
-    mutationFn: async (newMelody: RTTTLMelody) => {
-      let response
-      console.log(`PUT, ${newMelody.id}-${newMelody.title}`)
-      response = await fetch(`https://pg-melody-server-2.onrender.com/melodies/${newMelody.id}`, {method: "PUT", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newMelody)})
-      console.log(await response.json())
-      return response.json();
-    }
+  const putRequest = useMutation({
+    mutationFn: instanceMelodiesDatabase.updateMelody
   })
 
   useOutsideClick(inputRef, () => {
@@ -65,8 +59,8 @@ const MiniRedactor = ({
               code: melodyCode,
             };
 
-            mutationPUT.mutate(newMelody)
-            console.log(mutationPUT.error)
+            putRequest.mutate(newMelody)
+            console.log(putRequest.error)
             return newMelody
           }
         }),

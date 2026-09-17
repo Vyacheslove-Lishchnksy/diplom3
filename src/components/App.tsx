@@ -11,6 +11,7 @@ import { BigButtonUI } from "./UI/BigButtonUI";
 import { FaPlusCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useMelodyStore } from "../store/melodyStore";
+import { instanceMelodiesDatabase } from "../api/Database";
 
 export const App = (): JSX.Element => {
 
@@ -19,11 +20,7 @@ export const App = (): JSX.Element => {
 
   const query = useQuery({
     queryKey: ["currentList"],
-    queryFn: async () => {
-      const response = await fetch('https://pg-melody-server-2.onrender.com/melodies', {method: "GET"});
-      if (!response.ok) throw new Error('current list is not access');
-      return response.json();
-    }
+    queryFn: instanceMelodiesDatabase.getAllMelodies
   }) 
 
 
