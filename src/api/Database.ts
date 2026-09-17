@@ -8,9 +8,19 @@ class MelodiesDatabase {
     }
 
     public async getAllMelodies() {
-        const response = await fetch(`${this.url}/melodies`, {method: "GET"});
-        if (!response.ok) throw new Error('current list is not access');
-            return response.json();
+        console.log("get start " + `${this.url}/melodies`)
+
+        let response;
+        try {
+          response = await fetch(`${this.url}/melodies`, {method: "GET"});
+
+        } catch(e) {
+          console.log(e)
+        }
+        console.log(response, `${this.url}/melodies`);
+        
+        if (response && !response.ok) throw new Error('current list is not access');
+            return response?.json();
     }
 
     public async updateMelody(newMelody: RTTTLMelody) {
