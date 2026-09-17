@@ -8,7 +8,6 @@ class MelodiesDatabase {
     }
 
     public async getAllMelodies() {
-        console.log("get start " + `${this.url}/melodies`)
 
         let response;
         try {
@@ -17,7 +16,6 @@ class MelodiesDatabase {
         } catch(e) {
           console.log(e)
         }
-        console.log(response, `${this.url}/melodies`);
         
         if (response && !response.ok) throw new Error('current list is not access');
             return response?.json();

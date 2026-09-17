@@ -20,7 +20,8 @@ export const App = (): JSX.Element => {
 
   const query = useQuery({
     queryKey: ["currentList"],
-    queryFn: instanceMelodiesDatabase.getAllMelodies
+    queryFn: () => {
+      return instanceMelodiesDatabase.getAllMelodies()}
   }) 
 
 

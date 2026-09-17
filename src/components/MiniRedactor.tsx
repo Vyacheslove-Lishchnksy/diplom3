@@ -34,7 +34,7 @@ const MiniRedactor = ({
 
 
   const putRequest = useMutation({
-    mutationFn: instanceMelodiesDatabase.updateMelody
+    mutationFn: (newMelody: RTTTLMelody) => instanceMelodiesDatabase.updateMelody(newMelody)
   })
 
   useOutsideClick(inputRef, () => {

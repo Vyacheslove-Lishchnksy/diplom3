@@ -10,7 +10,7 @@ interface IUseDeleteMelodyProps {
 const useDeleteMelody = ({ melody }: IUseDeleteMelodyProps) => {
   const { currentList, setCurrentList } = useMelodyStore((state) => state);
   const deleteRequest = useMutation({
-    mutationFn: instanceMelodiesDatabase.deleteMelody
+      mutationFn: (id: string | undefined) => {return instanceMelodiesDatabase.deleteMelody(id)}
   })
 
 
