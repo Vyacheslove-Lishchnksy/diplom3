@@ -17,7 +17,7 @@ export const useMelodyStore = create<MelodyState>()(
       },
     }),
     {
-      name: "currentList",
+      name: "MelodyList",
       storage: createJSONStorage(() => localStorage),
       skipHydration: false,
     },

@@ -1,4 +1,4 @@
-import { JSX, useEffect, useMemo } from "react"
+import { JSX } from "react"
 import HeaderUI from "./UI/HeaderUI"
 import { useQuery } from "@tanstack/react-query";
 import { useStateStore } from "../store/stateStore";
@@ -11,42 +11,26 @@ import { BigButtonUI } from "./UI/BigButtonUI";
 import { FaPlusCircle } from "react-icons/fa";
 import Link from "next/link";
 import { useMelodyStore } from "../store/melodyStore";
-import { instanceMelodiesDatabase } from "../api/Database";
+import { DeviceStatus } from "../api/actions";
+import { useModal } from "../hooks/useModal";
+import { useLoadMelodyList } from "../hooks/useLoadMelodyList";
+import { useSearch } from "../hooks/useSearch";
 
 export const App = (): JSX.Element => {
 
   const currentList = useMelodyStore((state) => state.currentList)
-  const setCurrentStore = useMelodyStore((state) => state.setCurrentList)
+  const status: DeviceStatus = useStateStore(store => store.currentStatus)
 
-  const query = useQuery({
-    queryKey: ["currentList"],
-    queryFn: () => {
-      return instanceMelodiesDatabase.getAllMelodies()}
-  }) 
+  const ModalWindow = useModal({text: `melody ${status.melody} is ended`, isVisible: () => {
+    return (status.state === "stopped")
+  }})
 
-
-  useEffect(() => {
-    setCurrentStore([...[].concat(query.data)])
-    
-  }, [query.data])
+  useLoadMelodyList()
   
-  const search = useStateStore((store) => store.search);
+  const search = useSearch()
   const text = useLocalization();
+  const filteredList = search(currentList)
 
-  const filteredList = useMemo(() => {
-    const normalizedSearch = search.toLowerCase();
-
-    console.log(currentList)
-    return currentList.filter((item: RTTTLMelody) => {
-      if (!item) {
-        return
-      }
-      return (
-        item.title.toLowerCase().includes(normalizedSearch) ||
-        normalizedSearch === ""
-      );
-    });
-  }, [currentList, search]);
     return (<>
      <div className="flex mb-24 w-full items-center justify-between px-4">
         <HeaderUI>{text.HomeHeaderTitle}</HeaderUI>
@@ -63,6 +47,6 @@ export const App = (): JSX.Element => {
           </BigButtonUI>
         </Link>
       </section>
-    
+      <ModalWindow />
     </>)
 }

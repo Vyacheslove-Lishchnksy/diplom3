@@ -8,7 +8,6 @@ import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import styles from "./MelodyMenuItem.module.scss";
 import PlayButton from "./PlayButton";
 import useDeleteMelody from "../hooks/useDeleteMelody";
-import { useMutation } from "@tanstack/react-query";
 
 const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
   const [isRedacting, setIsRedacting] = useState(false);

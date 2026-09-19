@@ -1,8 +1,8 @@
 import mqtt from "mqtt";
 
 const MQTT_CONFIG = {
-  host: "broker.emqx.io",
-  port: 8084,
+  host: "broker.hivemq.com",
+  port: 8884,
   protocol: "wss",
   path: "/mqtt",
 };
@@ -15,6 +15,7 @@ export interface DeviceStatus {
 export type BuzzerCommand = "PAUSE" | "RESUME" | "TOGGLE";
 
 export const publishMelody = async (melodyString: string, deviceId: string) => {
+  console.log(deviceId)
   const client = mqtt.connect(
     `${MQTT_CONFIG.protocol}://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
   );

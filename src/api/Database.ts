@@ -44,4 +44,10 @@ class MelodiesDatabase {
     }
 }
 
-export const instanceMelodiesDatabase = new MelodiesDatabase("https://pg-melody-server-2.onrender.com");
+const API_BASE_URL = 
+  process.env.NEXT_PUBLIC_API_URL || "https://pg-melody-server-2.onrender.com";
+
+
+console.log(API_BASE_URL, " ", process.env.NEXT_PUBLIC_API_URL )
+
+export const instanceMelodiesDatabase = new MelodiesDatabase(API_BASE_URL);

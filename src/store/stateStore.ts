@@ -48,7 +48,7 @@ export const useLocaleStore = create<LocaleState>()(
       },
     }),
     {
-      name: "currentLocale",
+      name: "Locale",
       storage: createJSONStorage(() => localStorage),
       skipHydration: false,
     },

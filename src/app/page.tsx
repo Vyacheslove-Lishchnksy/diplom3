@@ -33,13 +33,8 @@ export default function Home() {
   
 
   return (
-
-    
-    <>
     <QueryClientProvider client={queryClient}>
      <App/>
     </QueryClientProvider>
-      
-    </>
   );
 }
