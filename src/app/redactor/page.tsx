@@ -9,6 +9,8 @@ import { noteDurationList } from "@/src/configs/redactorConfig";
 import RedactorApp from "./RedactorApp";
 import { useRedactor } from "@/src/hooks/useRedactor";
 import { useLocalization } from "@/src/hooks/useLocalization";
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa";
 
 const Redactor = () => {
   const {
@@ -31,6 +33,9 @@ const Redactor = () => {
       </div>
 
       <section className="flex gap-4 h-8" style={{ marginBottom: "24px" }}>
+        <Link href={"/"}>
+          <FaArrowLeft/>
+        </Link>
         <div className="relative">
           <InputUI
             placeholder="Title"

@@ -19,22 +19,10 @@ export default function Home() {
  
 
   useStatusCheck();  
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 60 * 1000,
-            retry: 1,
-          },
-        },
-      })
-  );
+
   
 
   return (
-    <QueryClientProvider client={queryClient}>
      <App/>
-    </QueryClientProvider>
   );
 }

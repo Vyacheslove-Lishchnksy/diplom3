@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,7 @@ export default function RootLayout({
       >
         <div className="flex h-screen overflow-hidden items-start justify-center bg-zinc-50 font-sans dark:bg-black">
           <main className="flex h-full w-full max-w-6xl flex-col items-center pt-10 bg-white dark:bg-black sm:items-start">
-            {children}
+            <Providers>{children}</Providers>
           </main>
         </div>
       </body>

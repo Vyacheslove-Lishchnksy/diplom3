@@ -14,11 +14,9 @@ export const useModal = ({text, isVisible: getIsVisible}: IUseModalArguments) =>
         const [isVisible, setIsVisible] = useState(false);
         useEffect(() => {
             setIsVisible(getIsVisible())
-            console.log(isVisible)
         }, [getIsVisible()]) 
         useOutsideClick(ref, () => {
             setIsVisible(false);
-            console.log(isVisible)
         }, [])
 
         

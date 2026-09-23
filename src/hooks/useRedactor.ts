@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useMelodyStore } from "@/src/store/melodyStore";
 import RTTTL from "@/src/scripts/RTTTL";
 import { useRTTTLStore } from "../store/RTTTLStore";
+import { useCreateMelody } from "./useCreateMelody";
 
 export const useRedactor = () => {
   const {
@@ -16,6 +17,11 @@ export const useRedactor = () => {
 
   const { currentList, setCurrentList } = useMelodyStore((store) => store);
   const [isNameError, setIsNameError] = useState(false);
+  const createMelody = useCreateMelody({
+    onSuccess: (newMelody) => {
+      setCurrentList([...currentList, newMelody]);
+    }
+  });
 
   const currentCode = useMemo(() => {
     const rtttl = new RTTTL();
@@ -38,8 +44,8 @@ export const useRedactor = () => {
       title: name,
       code: currentCode,
     };
+    createMelody.mutate(newMelody, )
 
-    setCurrentList([...currentList, newMelody]);
   };
 
   return {

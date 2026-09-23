@@ -4,9 +4,9 @@ import ChangeModeButton from "./ChangeModeButton";
 import AddNewMelodyButton from "./AddNewMelodyButton";
 import SearchUI from "./UI/SearchUI/SearchUI";
 import { useLocalization } from "../hooks/useLocalization";
-import { EnglishSet } from "../configs/lang/en";
 import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import { useCurrentLangFlag } from "../hooks/useCurrentLangFlag";
+import Image from "next/image";
 
 const NavigationBar = (): JSX.Element => {
   const { search, setSearch,  } = useStateStore((state) => state);
@@ -27,13 +27,13 @@ const NavigationBar = (): JSX.Element => {
             setLang(lang === "en" ? "uk" : "en");
           }}
         >
-          {flag}
+          <Image className="p-0.5" src={flag ?? ""} alt={lang} width={24} height={24}/>
         </SimpleSmallButtonUI>
       </div>
       <SearchUI
         search={search}
         setSearch={setSearch}
-        placeholder={Search ?? EnglishSet.Search}
+        placeholder={Search}
       />
     </nav>
   );

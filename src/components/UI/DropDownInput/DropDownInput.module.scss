@@ -1,0 +1,92 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+}
+
+.input:focus {
+  border-color: #9ca3af;
+}
+
+.list {
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  right: 0;
+  left: 0;
+  display: none;
+  max-height: 230px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.container:hover .list,
+.container:focus-within .list {
+  display: block;
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  color: #f3f4f6;
+  overflow: hidden;
+}
+
+.optionLabel {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.deleteButton {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  padding: 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #f87171;
+  cursor: pointer;
+}
+
+.option:hover,
+.option:focus-within,
+.optionLabel:focus-visible,
+.deleteButton:hover,
+.deleteButton:focus-visible {
+  background: #374151;
+  outline: none;
+}
+
+.input {
+  &:focus {
+    outline: none;
+  }
+}
+
+.wrapper {
+  border-color: white;
+  &:focus-within {
+    outline: 1px solid white;
+  }
+}
+
+.wrapper:hover .list,
+.wrapper:focus-within .list {
+  display: block;
+}

@@ -3,20 +3,22 @@
 import { useState } from "react";
 import Storage from "../api/Storage";
 import { ButtonUI } from "./UI/ButtonUI";
-import InputUI from "./UI/InputUI/InputUI";
 import { useMQTTStore } from "../store/melodyStore";
 import { useLocalization } from "../hooks/useLocalization";
+import { DropDownInput } from "./UI/DropDownInput/DropDownInput";
 
 export const ConnectionForm = () => {
-  const deviceId = Storage.getDeviceId();
+  const lang = useLocalization();
+  const { deviceIdList, removeDeviceId, setDeviceId, deviceId, addDeviceId } = useMQTTStore()
   const [id, setId] = useState(deviceId);
   const [value, setValue] = useState(deviceId);
-  const { setDeviceId } = useMQTTStore((store) => store);
-  const lang = useLocalization();
 
   const handleSubmit = () => {
     const newId = value ?? "";
     setDeviceId(newId);
+    if (!deviceIdList.includes(deviceId)) {
+      addDeviceId(deviceId);
+    }
     Storage.setDeviceId(newId);
     setId(newId);
   };
@@ -29,15 +31,17 @@ export const ConnectionForm = () => {
             <h2>
               {id ? lang.ChangeDeviceMenuTitle : lang.ChangeDeviceMenuTitleNo}
             </h2>
-            <InputUI
-              tabIndex={11}
+            <DropDownInput list={deviceIdList}
+             placeholder="device id"
+             tabIndex={11}
               type="text"
-              className="px-2 border border-green-100 rounded"
-              id="deviceId"
-              placeholder="device id"
               value={value ?? ""}
-              onChange={(e) => setValue(e.target.value)}
-            />
+              onChange={(e) => {
+                setValue(e.target.value)}
+              }
+              onDelete={removeDeviceId}
+              className="px-2 border border-green-100 rounded"
+             />
             <ButtonUI onClick={handleSubmit} tabIndex={12}>
               {id ? lang.ChangeButtonTitle : lang.ConnectButtonTitle}
             </ButtonUI>

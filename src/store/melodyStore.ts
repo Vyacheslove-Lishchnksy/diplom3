@@ -27,6 +27,9 @@ export const useMelodyStore = create<MelodyState>()(
 interface MQTTStore {
   deviceId: string;
   setDeviceId: (id: string) => void;
+  deviceIdList: string[];
+  addDeviceId: (id: string) => void;
+  removeDeviceId: (id: string) => void;
 }
 
 export const useMQTTStore = create<MQTTStore>()(
@@ -35,6 +38,21 @@ export const useMQTTStore = create<MQTTStore>()(
       deviceId: "",
       setDeviceId: (id) => {
         set({ deviceId: id });
+      },
+      deviceIdList: [],
+      addDeviceId: (id) => {
+        set((state) => ({
+          deviceIdList: state.deviceIdList.includes(id)
+            ? state.deviceIdList
+            : [...state.deviceIdList, id],
+        }));
+      },
+      removeDeviceId: (id) => {
+        set((state) => ({
+          deviceIdList: state.deviceIdList.filter(
+            (deviceId) => deviceId !== id,
+          ),
+        }));
       },
     }),
     {
