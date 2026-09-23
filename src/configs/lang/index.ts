@@ -2,9 +2,9 @@ import { TLangCode } from "../defaultOptions";
 import { EnglishSet } from "./en";
 import { UkraineSet } from "./uk";
 
-type TErrorWithDynamicValue = (value: string) => string;
+type TMessageWithDynamicValue = (value: string) => string;
 
-export interface ILangSet {
+export interface ILangSet extends Record<string, string | TMessageWithDynamicValue | undefined> {
   HomeHeaderTitle?: string;
   Search?: string;
   RedactorHeaderTitle?: string;
@@ -17,9 +17,10 @@ export interface ILangSet {
   ConnectButtonTitle?: string;
   TheSameNameError?: string;
   CanNotBeEmptyError?: string;
-  InvalidNoteError?: TErrorWithDynamicValue;
+  InvalidNoteError?: TMessageWithDynamicValue;
   InvalidFormatError?: string;
   InvalidSettingsError?: string;
+  MelodyIsEnded?: TMessageWithDynamicValue;
 }
 
 export const locales: Record<TLangCode, ILangSet> = {

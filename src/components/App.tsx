@@ -15,13 +15,15 @@ import { DeviceStatus } from "../api/actions";
 import { useModal } from "../hooks/useModal";
 import { useLoadMelodyList } from "../hooks/useLoadMelodyList";
 import { useSearch } from "../hooks/useSearch";
+import { EnglishSet } from "../configs/lang/en";
 
 export const App = (): JSX.Element => {
 
   const currentList = useMelodyStore((state) => state.currentList)
   const status: DeviceStatus = useStateStore(store => store.currentStatus)
+  const { MelodyIsEnded } = useLocalization();
 
-  const ModalWindow = useModal({text: `melody ${status.melody} is ended`, isVisible: () => {
+  const ModalWindow = useModal({text: MelodyIsEnded(status.melody ?? ""), isVisible: () => {
     return (status.state === "stopped")
   }})
 

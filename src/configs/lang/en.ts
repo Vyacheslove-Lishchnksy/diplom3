@@ -16,4 +16,5 @@ export const EnglishSet: Required<ILangSet> = {
   InvalidNoteError: (value: string) => `Invalid note found: ${value}`,
   InvalidFormatError: "Invalid format. Expected 'Title:Settings:Notes'",
   InvalidSettingsError: "Invalid settings. Use format 'd=4,o=5,b=160'",
+  MelodyIsEnded: (value) =>  `melody ${value} is ended`
 };

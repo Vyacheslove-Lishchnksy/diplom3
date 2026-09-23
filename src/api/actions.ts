@@ -53,8 +53,6 @@ export const subscribeToStatus = (
     if (topic === statusTopic) {
       try {
         const status: DeviceStatus = JSON.parse(message.toString());
-
-        console.log(status);
         onStatusUpdate(status);
       } catch (e) {
         console.error("[MQTT] Error parsing status message", e);
@@ -73,11 +71,6 @@ export const subscribeToStatus = (
 };
 
 export const sendBuzzerCommand = (deviceId: string, payload: BuzzerCommand) => {
-  console.log(
-    `[MQTT] Фізична відправка повідомлення в ${deviceId}/buzzer:`,
-    payload,
-  );
-
   const client = mqtt.connect(
     `${MQTT_CONFIG.protocol}://${MQTT_CONFIG.host}:${MQTT_CONFIG.port}${MQTT_CONFIG.path}`,
   );
@@ -86,7 +79,6 @@ export const sendBuzzerCommand = (deviceId: string, payload: BuzzerCommand) => {
 
   client.on("connect", () => {
     client.publish(targetTopic, payload, { qos: 1 }, () => {
-      console.log("[MQTT] Пакет успішно доставлено брокеру");
       client.end();
     });
   });
