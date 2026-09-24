@@ -2,7 +2,7 @@ import { JSX } from "react";
 import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import { useMelodyStore } from "../store/melodyStore";
 import { IoMdAddCircle } from "react-icons/io";
-import { useCreateMelody } from "../hooks/useCreateMelody";
+import { useCreateMelody } from "../hooks/Melody/useCreateMelody";
 
 const AddNewMelodyButton = (): JSX.Element => {
   const { currentList, setCurrentList } = useMelodyStore();

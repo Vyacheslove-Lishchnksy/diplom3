@@ -7,7 +7,7 @@ import MiniRedactor from "./MiniRedactor";
 import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
 import styles from "./MelodyMenuItem.module.scss";
 import PlayButton from "./PlayButton";
-import useDeleteMelody from "../hooks/useDeleteMelody";
+import useDeleteMelody from "../hooks/Melody/useDeleteMelody";
 
 const MelodyMenuItem = ({ melody }: { melody: RTTTLMelody }) => {
   const [isRedacting, setIsRedacting] = useState(false);

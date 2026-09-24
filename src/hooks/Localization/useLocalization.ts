@@ -1,6 +1,6 @@
-import { ILangSet, locales } from "../configs/lang";
-import { EnglishSet } from "../configs/lang/en";
-import { useLocaleStore } from "../store/stateStore"; 
+import { ILangSet, locales } from "../../configs/lang";
+import { EnglishSet } from "../../configs/lang/en";
+import { useLocaleStore } from "../../store/stateStore"; 
 
 export const useLocalization = ():  Required<ILangSet> => {
   const lang = useLocaleStore((store) => store.lang);

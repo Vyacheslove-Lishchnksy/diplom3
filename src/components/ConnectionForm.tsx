@@ -4,7 +4,7 @@ import { useState } from "react";
 import Storage from "../api/Storage";
 import { ButtonUI } from "./UI/ButtonUI";
 import { useMQTTStore } from "../store/melodyStore";
-import { useLocalization } from "../hooks/useLocalization";
+import { useLocalization } from "../hooks/Localization/useLocalization";
 import { DropDownInput } from "./UI/DropDownInput/DropDownInput";
 
 export const ConnectionForm = () => {

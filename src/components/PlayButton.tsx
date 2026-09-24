@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { MdOutlinePause, MdPlayArrow } from "react-icons/md";
-import { useMelodyPlayer } from "../hooks/useMelodyPlayer";
+import { useMelodyPlayer } from "../hooks/Melody/useMelodyPlayer";
 import { RTTTLMelody } from "../configs/default_melodies";
 import styles from "./MelodyMenuItem.module.scss";
 

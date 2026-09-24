@@ -1,7 +1,7 @@
-import { useMelodyStore } from "../store/melodyStore";
-import { RTTTLMelody } from "../configs/default_melodies";
+import { useMelodyStore } from "../../store/melodyStore";
+import { RTTTLMelody } from "../../configs/default_melodies";
 import { useMutation } from "@tanstack/react-query";
-import { instanceMelodiesDatabase } from "../api/Database";
+import { instanceMelodiesDatabase } from "../../api/Database";
 
 interface IUseDeleteMelodyProps {
   melody: RTTTLMelody;

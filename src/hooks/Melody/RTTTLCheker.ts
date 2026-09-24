@@ -1,6 +1,6 @@
-import { IErrorFormat } from "../components/UI/ErrorTextUI";
-import { EnglishSet } from "../configs/lang/en";
-import { useLocalization } from "./useLocalization";
+import { IErrorFormat } from "../../components/UI/ErrorTextUI";
+import { EnglishSet } from "../../configs/lang/en";
+import { useLocalization } from "../Localization/useLocalization";
 
 export const useValidateRTTTL = () => {
   const lang = useLocalization();

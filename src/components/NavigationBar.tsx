@@ -3,10 +3,10 @@ import { useStateStore, useLocaleStore } from "../store/stateStore";
 import ChangeModeButton from "./ChangeModeButton";
 import AddNewMelodyButton from "./AddNewMelodyButton";
 import SearchUI from "./UI/SearchUI/SearchUI";
-import { useLocalization } from "../hooks/useLocalization";
+import { useLocalization } from "../hooks/Localization/useLocalization";
 import SimpleSmallButtonUI from "./UI/SimpleSmallButtonUI/SimpleSmallButtonUI";
-import { useCurrentLangFlag } from "../hooks/useCurrentLangFlag";
 import Image from "next/image";
+import { useCurrentLangFlag } from "../hooks/Localization/useCurrentLangFlag";
 
 const NavigationBar = (): JSX.Element => {
   const { search, setSearch,  } = useStateStore((state) => state);

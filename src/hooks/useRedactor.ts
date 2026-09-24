@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useMelodyStore } from "@/src/store/melodyStore";
 import RTTTL from "@/src/scripts/RTTTL";
 import { useRTTTLStore } from "../store/RTTTLStore";
-import { useCreateMelody } from "./useCreateMelody";
+import { useCreateMelody } from "./Melody/useCreateMelody";
 
 export const useRedactor = () => {
   const {

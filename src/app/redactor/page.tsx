@@ -8,7 +8,7 @@ import ErrorTextUI from "@/src/components/UI/ErrorTextUI";
 import { noteDurationList } from "@/src/configs/redactorConfig";
 import RedactorApp from "./RedactorApp";
 import { useRedactor } from "@/src/hooks/useRedactor";
-import { useLocalization } from "@/src/hooks/useLocalization";
+import { useLocalization } from "@/src/hooks/Localization/useLocalization";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 

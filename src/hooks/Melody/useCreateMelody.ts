@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { instanceMelodiesDatabase } from "../api/Database";
-import { RTTTLMelody } from "../configs/default_melodies";
+import { instanceMelodiesDatabase } from "../../api/Database";
+import { RTTTLMelody } from "../../configs/default_melodies";
 
 interface UseCreateMelodyOptions {
   onSuccess?: (melody: RTTTLMelody) => void;

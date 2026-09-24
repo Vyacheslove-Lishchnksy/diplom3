@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../configs/Databace.config";
 import { RTTTLMelody } from "../configs/default_melodies";
 
 class MelodiesDatabase {
@@ -43,11 +44,5 @@ class MelodiesDatabase {
       } 
     }
 }
-
-const API_BASE_URL = 
-  process.env.NEXT_PUBLIC_API_URL || "https://pg-melody-server-2.onrender.com";
-
-
-console.log(API_BASE_URL, " ", process.env.NEXT_PUBLIC_API_URL )
 
 export const instanceMelodiesDatabase = new MelodiesDatabase(API_BASE_URL);

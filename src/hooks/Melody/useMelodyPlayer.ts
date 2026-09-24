@@ -1,7 +1,7 @@
-import {  useMQTTStore } from "../store/melodyStore";
-import { useStateStore } from "../store/stateStore"
-import { getPlayerInstance } from "../api/playRTTTL";
-import { sendBuzzerCommand, publishMelody } from "../api/actions";
+import {  useMQTTStore } from "../../store/melodyStore";
+import { useStateStore } from "../../store/stateStore"
+import { getPlayerInstance } from "../../api/playRTTTL";
+import { sendBuzzerCommand, publishMelody } from "../../api/actions";
 import { useEffect } from "react";
 
 export const useMelodyPlayer = (melodyCode: string) => {
@@ -11,7 +11,7 @@ export const useMelodyPlayer = (melodyCode: string) => {
     isPlaying,
     setIsPlaying,
   } = useStateStore();
-  const { deviceId } = useMQTTStore();
+  const deviceId = useMQTTStore(state => state.deviceId);
 
   const melodyName = melodyCode.slice(0, melodyCode.indexOf(":"));
 

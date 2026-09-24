@@ -2,7 +2,7 @@ import { JSX } from "react"
 import HeaderUI from "./UI/HeaderUI"
 import { useQuery } from "@tanstack/react-query";
 import { useStateStore } from "../store/stateStore";
-import { useLocalization } from "../hooks/useLocalization";
+import { useLocalization } from "../hooks/Localization/useLocalization";
 import { RTTTLMelody } from "../configs/default_melodies";
 import TopBarButtons from "./TopBarButtons";
 import NavigationBar from "./NavigationBar";
@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useMelodyStore } from "../store/melodyStore";
 import { DeviceStatus } from "../api/actions";
 import { useModal } from "../hooks/useModal";
-import { useLoadMelodyList } from "../hooks/useLoadMelodyList";
+import { useLoadMelodyList } from "../hooks/Melody/useLoadMelodyList";
 import { useSearch } from "../hooks/useSearch";
 import { EnglishSet } from "../configs/lang/en";
 

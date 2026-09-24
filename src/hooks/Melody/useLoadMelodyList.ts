@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
-import { instanceMelodiesDatabase } from "../api/Database"
+import { instanceMelodiesDatabase } from "../../api/Database"
 import { useEffect } from "react"
-import { useMelodyStore } from "../store/melodyStore"
+import { useMelodyStore } from "../../store/melodyStore"
 
 export const useLoadMelodyList = () => {
     const setCurrentStore = useMelodyStore((state) => state.setCurrentList)

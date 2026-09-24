@@ -5,7 +5,7 @@ import { ButtonUI } from "./UI/ButtonUI";
 import { rtttlFileInstance } from "../scripts/RTTTLFile";
 import { useMelodyStore } from "../store/melodyStore";
 import { useState } from "react";
-import { useLocalization } from "../hooks/useLocalization";
+import { useLocalization } from "../hooks/Localization/useLocalization";
 
 export const FileMenu = () => {
   const currentList = useMelodyStore((state) => state.currentList);

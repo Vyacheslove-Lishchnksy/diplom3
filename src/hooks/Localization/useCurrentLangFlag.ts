@@ -1,4 +1,4 @@
-import { useLocaleStore } from "../store/stateStore";
+import { useLocaleStore } from "@/src/store/stateStore";
 
 export const useCurrentLangFlag = () => {
   const lang = useLocaleStore((store) => store.lang);
